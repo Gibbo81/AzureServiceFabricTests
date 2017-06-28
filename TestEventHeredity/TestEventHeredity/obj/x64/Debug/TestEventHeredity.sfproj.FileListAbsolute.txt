@@ -1,0 +1,1 @@
+C:\Git\TestServiceFabricAzure\TestEventHeredity\TestEventHeredity\obj\x64\Debug\TestEventHeredity.sfprojResolveAssemblyReference.cache
