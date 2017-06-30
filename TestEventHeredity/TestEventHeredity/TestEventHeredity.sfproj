@@ -30,7 +30,9 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ActorCaller\ActorCaller.csproj" />
     <ProjectReference Include="..\Client\Client.csproj" />
+    <ProjectReference Include="..\MyActor\MyActor.csproj" />
     <ProjectReference Include="..\Producer\Producer.csproj" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
