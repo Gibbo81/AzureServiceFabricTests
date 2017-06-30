@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyActor.Interfaces", "MyAct
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActorCaller", "ActorCaller\ActorCaller.csproj", "{D6EBE653-FC0D-42AB-9168-909CED2BC7F7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActorEventListener", "ActorEventListener\ActorEventListener.csproj", "{FC164FCF-5326-4DE5-904D-F5F2A5A2FFFF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,6 +95,12 @@ Global
 		{D6EBE653-FC0D-42AB-9168-909CED2BC7F7}.Release|Any CPU.ActiveCfg = Release|x64
 		{D6EBE653-FC0D-42AB-9168-909CED2BC7F7}.Release|x64.ActiveCfg = Release|x64
 		{D6EBE653-FC0D-42AB-9168-909CED2BC7F7}.Release|x64.Build.0 = Release|x64
+		{FC164FCF-5326-4DE5-904D-F5F2A5A2FFFF}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{FC164FCF-5326-4DE5-904D-F5F2A5A2FFFF}.Debug|x64.ActiveCfg = Debug|x64
+		{FC164FCF-5326-4DE5-904D-F5F2A5A2FFFF}.Debug|x64.Build.0 = Debug|x64
+		{FC164FCF-5326-4DE5-904D-F5F2A5A2FFFF}.Release|Any CPU.ActiveCfg = Release|x64
+		{FC164FCF-5326-4DE5-904D-F5F2A5A2FFFF}.Release|x64.ActiveCfg = Release|x64
+		{FC164FCF-5326-4DE5-904D-F5F2A5A2FFFF}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

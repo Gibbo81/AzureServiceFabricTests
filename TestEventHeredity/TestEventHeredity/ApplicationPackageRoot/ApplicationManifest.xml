@@ -1,6 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ApplicationManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ApplicationTypeName="TestEventHeredityType" ApplicationTypeVersion="1.0.0" xmlns="http://schemas.microsoft.com/2011/01/fabric">
   <Parameters>
+    <Parameter Name="ActorEventListener_MinReplicaSetSize" DefaultValue="3" />
+    <Parameter Name="ActorEventListener_PartitionCount" DefaultValue="1" />
+    <Parameter Name="ActorEventListener_TargetReplicaSetSize" DefaultValue="3" />
     <Parameter Name="ActorCaller_MinReplicaSetSize" DefaultValue="3" />
     <Parameter Name="ActorCaller_PartitionCount" DefaultValue="1" />
     <Parameter Name="ActorCaller_TargetReplicaSetSize" DefaultValue="3" />
@@ -13,10 +16,17 @@
     <Parameter Name="MyActorService_PartitionCount" DefaultValue="10" />
     <Parameter Name="MyActorService_MinReplicaSetSize" DefaultValue="3" />
     <Parameter Name="MyActorService_TargetReplicaSetSize" DefaultValue="3" />
+    <Parameter Name="ActorEventInterfaceActorService_PartitionCount" DefaultValue="10" />
+    <Parameter Name="ActorEventInterfaceActorService_MinReplicaSetSize" DefaultValue="3" />
+    <Parameter Name="ActorEventInterfaceActorService_TargetReplicaSetSize" DefaultValue="3" />
   </Parameters>
   <!-- Import the ServiceManifest from the ServicePackage. The ServiceManifestName and ServiceManifestVersion 
        should match the Name and Version attributes of the ServiceManifest element defined in the 
        ServiceManifest.xml file. -->
+  <ServiceManifestImport>
+    <ServiceManifestRef ServiceManifestName="ActorEventListenerPkg" ServiceManifestVersion="1.0.0" />
+    <ConfigOverrides />
+  </ServiceManifestImport>
   <ServiceManifestImport>
     <ServiceManifestRef ServiceManifestName="ActorCallerPkg" ServiceManifestVersion="1.0.0" />
     <ConfigOverrides />
@@ -38,6 +48,11 @@
          ServiceFabric PowerShell module.
          
          The attribute ServiceTypeName below must match the name defined in the imported ServiceManifest.xml file. -->
+    <Service Name="ActorEventListener">
+      <StatefulService ServiceTypeName="ActorEventListenerType" TargetReplicaSetSize="[ActorEventListener_TargetReplicaSetSize]" MinReplicaSetSize="[ActorEventListener_MinReplicaSetSize]">
+        <UniformInt64Partition PartitionCount="[ActorEventListener_PartitionCount]" LowKey="-9223372036854775808" HighKey="9223372036854775807" />
+      </StatefulService>
+    </Service>
     <Service Name="ActorCaller">
       <StatefulService ServiceTypeName="ActorCallerType" TargetReplicaSetSize="[ActorCaller_TargetReplicaSetSize]" MinReplicaSetSize="[ActorCaller_MinReplicaSetSize]">
         <UniformInt64Partition PartitionCount="[ActorCaller_PartitionCount]" LowKey="-9223372036854775808" HighKey="9223372036854775807" />
@@ -56,6 +71,11 @@
     <Service Name="MyActorService" GeneratedIdRef="ef0cbe66-777c-4e8d-b17c-f416f80ab0ca|Persisted">
       <StatefulService ServiceTypeName="MyActorServiceType" TargetReplicaSetSize="[MyActorService_TargetReplicaSetSize]" MinReplicaSetSize="[MyActorService_MinReplicaSetSize]">
         <UniformInt64Partition PartitionCount="[MyActorService_PartitionCount]" LowKey="-9223372036854775808" HighKey="9223372036854775807" />
+      </StatefulService>
+    </Service>
+    <Service Name="ActorEventInterfaceActorService" GeneratedIdRef="dbe43665-1bb3-4b86-a61f-1064945b6092|Persisted">
+      <StatefulService ServiceTypeName="EventGeneratingActorServiceType" TargetReplicaSetSize="[ActorEventInterfaceActorService_TargetReplicaSetSize]" MinReplicaSetSize="[ActorEventInterfaceActorService_MinReplicaSetSize]">
+        <UniformInt64Partition PartitionCount="[ActorEventInterfaceActorService_PartitionCount]" LowKey="-9223372036854775808" HighKey="9223372036854775807" />
       </StatefulService>
     </Service>
   </DefaultServices>

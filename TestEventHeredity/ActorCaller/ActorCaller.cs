@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Fabric;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.ServiceFabric.Actors;
 using Microsoft.ServiceFabric.Actors.Client;
-using Microsoft.ServiceFabric.Data.Collections;
 using Microsoft.ServiceFabric.Services.Communication.Runtime;
 using Microsoft.ServiceFabric.Services.Runtime;
 using MyActor.Interfaces;
@@ -47,6 +47,13 @@ namespace ActorCaller
 
             var x = await myactor.HelloWord();
             ServiceEventSource.Current.ServiceMessage(Context, x);
+
+            //Call event generating actor
+            var newproxy = ActorProxy.Create<IActorEventInterface>(ActorId.CreateRandom());
+            var b = await newproxy.UpdateGameStatus(new Guid(), "ten");
+            ServiceEventSource.Current.ServiceMessage(Context,
+                                                      "Called actor event generator with result {0}",
+                                                      b);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using Microsoft.ServiceFabric.Actors.Runtime;
+using MyActor.Event;
 
 namespace MyActor
 {
@@ -21,7 +22,10 @@ namespace MyActor
                 ActorRuntime.RegisterActorAsync<MyActor>((context, actorType) => new ActorService(context, actorType))
                             .GetAwaiter()
                             .GetResult();
-
+                ActorRuntime.RegisterActorAsync<EventGeneratingActor>((context, actorType) => new ActorService(context, actorType))
+                            .GetAwaiter()
+                            .GetResult();
+                
                 Thread.Sleep(Timeout.Infinite);
             }
             catch (Exception e)
