@@ -22,6 +22,19 @@ namespace MyActor
                             .GetAwaiter()
                             .GetResult();
 
+                /* hOW TO USE dependency injection on actor registration
+                  
+                    public MessageProcessingActor(ActorService actorService, 
+                            ActorId actorId, 
+                            IEnumerable<IMessageHandler> handlers) 
+                 
+                  
+                    await ActorRuntime.RegisterActorAsync<MessageProcessingActor>(
+                        (context, actorType) => new ActorService(context, actorType, 
+                        (s, id) => new MessageProcessingActor(s,id, _handlers))
+                        );
+                */
+
                 Thread.Sleep(Timeout.Infinite);
             }
             catch (Exception e)
